@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--ng-app directive goes in html tag-->
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Very Simple Todo App</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/app/styles/styles.css">
+    <!-- endinject -->
+</head>
+<!--ng-controller directive goes in body tag-->
+
+<body ng-controller="myController">
+    <div class="container">
+        <div>
+            <div class="col-md-12 jumbotron">
+                <h1>Very Not sooo Simple Todo App</h1>
+            </div>
+            <!--Panel 1 Left side goes below here-->
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Add ToDo Item</div>
+                    <div class="panel-body">
+                        <label>Test</label>
+                        <input type="text" class="form-control form-group" ng-model="inputHere">
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <select class="form-control" ng-model="priority">
+                                <option value="1">High Priority</option>
+                                <option value="2">Medium Priority</option>
+                                <option value="3">Low Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-default btn-primary" ng-click="toDo()">Add ToDo</button>
+                    </div>
+                </div>
+            </div>
+            <!--Panel 2 Right side goes below here-->
+            <div class="col-md-8 ">
+                <div class="panel panel-default ">
+                    <div class="panel-heading ">
+                        <div class="btn-group">
+                            <button ng-click="sortToDo='description';" class="btn btn-primary btn-sm">Order by highest priority</button>
+                            <button ng-click="sortToDo ='-description';" class="btn btn-primary btn-sm">Order by lowest priority</button>
+                            <button ng-click="sortToDo ='text'" class="btn btn-primary btn-sm">Order alphabetically</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!--Fix below this line with panels, rows or table-->
+                    <table class="table ">
+                        <!--<th><td ng-click="sortToDo('alpha')">Sort by To Do</td><td ng-click="sortToDo('priority')">Sort by Priority</td></th>-->
+                        <tr ng-repeat="note in myArray | orderBy: sortToDo">
+                            <td ng-class="{'bg-info':note.description==='3', 'bg-warning':note.description==='2', 'bg-danger':note.description==='1'}">{{note.text}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/col-->
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <!-- endbower -->
+        <!--<h1>HEY You</h1>-->
+        <!-- inject:js -->
+        <script src="/app/app.js"></script>
+        <!-- endinject -->
+    </body>
+
+    </html>
